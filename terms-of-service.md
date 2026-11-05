@@ -1,13 +1,13 @@
-# Terms of Service — Bible Wisdom
+# Terms of Service — Scriptum
 
 **Effective date:** 2026-10-27
-**Last updated:** 2026-10-27
+**Last updated:** 2026-11-05
 
 ---
 
 ## 1. Agreement and scope
 
-These Terms of Service ("Terms") govern your use of **Bible Wisdom** — the
+These Terms of Service ("Terms") govern your use of **Scriptum** — the
 Android application, its public APIs (`api-bible.contentfactory.trade`,
 `api-bible-users.contentfactory.trade`) and related services (collectively,
 the "Service"), operated by CODEZAUR Dominik Lipinski, ("we", "us", the "Operator").
@@ -32,17 +32,21 @@ The Service provides Bible verses and related functionality, including:
   grief, anxiety, family). When selected, verses are drawn from
   pre-computed, relevance-ranked lists for those topics.
 - **On-device corpus** — the full text of a Bible edition you select may be
-  downloaded to your device (~5 MB) for offline reading, book browsing, and
-  in-book search.
+  downloaded to your device (~5–9 MB, varies by edition) for offline
+  reading, book browsing, and in-book search.
 - **Sharing** — rendering of verse images you may share through other apps.
 - **Multiple languages and editions** — currently seven languages, each
   served from a specific Bible translation ("Edition").
+- **Reading programs** — curated multi-day reading plans; enrollment and
+  progress are tracked on your device.
+- **Bookmarks and reading progress** — verses you bookmark or read are
+  recorded locally on your device and shown in the App's stats.
+- **Accounts** — optional sign-in via email/password or Google Sign-In,
+  enabling profile data and activity streaks.
 
 Features marked as planned below may be added, changed, or removed at our
 discretion:
 
-- **Accounts** — optional sign-in via email/password or Google Sign-In,
-  enabling profile data, activity streaks, and (later) social features.
 - **Premium tier** — a paid subscription unlocking features such as
   **semantic verse search** (free-text queries like "fear of losing my job"
   matched to relevant verses), subject to daily usage quotas.
@@ -73,18 +77,20 @@ detect credential theft, token reuse, or other abuse.
 ### 3.4 Account deletion
 
 You may delete your account at any time from the App's profile screen
-(`DELETE /me` for API clients). Deletion is a soft delete: your email
-address is anonymized, linked OAuth identities are removed, and all
-sessions are revoked. Residual data is retained only as described in the
-Privacy Policy (e.g. billing audit records where required).
+(or via the public API). On deletion, your email
+address is anonymized and all data linked to the account — OAuth
+identities, sessions, activity days, entitlements — is deleted
+outright. The account record itself is retained only in anonymized
+form, as described in the Privacy Policy.
 
 ## 4. Subscriptions and payments
 
 ### 4.1 Premium tier
 
-Certain features (including semantic verse search) are offered under a paid
-subscription ("Premium"). All purchases are processed by **Google Play
-Billing**; we do not collect or store your payment method details.
+Certain features (including semantic verse search) are or may be offered
+under a paid subscription ("Premium"). All purchases are processed by
+**Google Play Billing**; we do not collect or store your payment method
+details.
 
 ### 4.2 Billing terms
 
@@ -196,9 +202,9 @@ streaks, bookmarks, or other stored state.
 Your use of the Service is also governed by the **Privacy Policy**
 (published in the App's Legal section and the Play listing). In short: we
 collect the minimum needed to operate — account identifiers, timezone and
-locale for streaks/notifications, activity days, usage events for quota
-and cost audit, and billing entitlement records from Google Play. We do
-not sell your data.
+locale for streaks/notifications, activity days, and (when subscriptions
+ship) billing entitlement records from Google Play. We do not sell your
+data.
 
 ## 9. Third-party services
 
