@@ -1,1 +1,1 @@
-**https://codezaur-labs.github.io/BibleWisdom/**
+**https://codezaur-labs.github.io/Scriptum/**
