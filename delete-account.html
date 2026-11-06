@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete your account — Scriptum</title>
+<style>
+  :root {
+    --bg: #0f131c;
+    --surface: #181c24;
+    --surface-high: #1c2028;
+    --border: rgba(126, 156, 185, 0.18);
+    --text: #dfe2ee;
+    --text-dim: #94a3b8;
+    --gold: #d4af37;
+    --error: #ffb4ab;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(26, 38, 64, 0.5) 0%, transparent 70%),
+      var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1.25rem;
+  }
+  main { width: 100%; max-width: 540px; }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem;
+  }
+  .brand {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  p, li { color: var(--text-dim); font-size: 0.95rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 1rem 0 0.35rem;
+  }
+  input {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-high);
+    color: var(--text);
+    font-size: 1rem;
+  }
+  input:focus {
+    outline: none;
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  }
+  button {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--gold);
+    color: #241a00;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.55; cursor: default; }
+  .msg { margin-top: 1rem; font-size: 0.9rem; display: none; }
+  .msg.error { color: var(--error); }
+  .msg.ok { color: var(--gold); }
+  ul { padding-left: 1.25rem; }
+  a { color: var(--gold); }
+  .note {
+    font-size: 0.85rem;
+    border-left: 2px solid var(--gold);
+    padding-left: 0.9rem;
+    margin: 1.5rem 0;
+  }
+  footer { margin-top: 3rem; font-size: 0.8rem; color: var(--text-dim); }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">Scriptum</div>
+  <h1>Delete your account</h1>
+  <p>
+    This page lets you permanently delete your Scriptum account without
+    opening the app — for example if you've already uninstalled it.
+    You can also delete your account inside the app:
+    <strong>Profile → Delete account</strong>.
+  </p>
+
+  <div class="card">
+    <p style="margin-top:0"><strong>What gets deleted</strong></p>
+    <ul>
+      <li>Your account record — the email is irreversibly rewritten to a
+        generated placeholder and can no longer be used to sign in.</li>
+      <li>All sign-in sessions and refresh tokens.</li>
+      <li>Your streaks and activity history.</li>
+      <li>Any subscription entitlements attached to the account
+        (Google Play keeps its own purchase record).</li>
+    </ul>
+    <p style="margin-bottom:0">
+      Reading progress, bookmarks and the downloaded Bible live only on
+      your device — uninstalling the app removes them.
+    </p>
+  </div>
+
+  <form id="delete-form" autocomplete="on">
+    <label for="email">Account email</label>
+    <input id="email" name="email" type="email" required autocomplete="username">
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required autocomplete="current-password">
+
+    <button id="submit" type="submit">Delete my account permanently</button>
+    <p id="message" class="msg" role="alert"></p>
+  </form>
+
+  <div class="note">
+    <strong>Signed up with Google?</strong> Those accounts have no password.
+    Open the app and use <em>Profile → Delete account</em>, set a password
+    first in <em>Profile → Set password</em> and return here, or email us at
+    <a href="mailto:codezaur@gmail.com">codezaur@gmail.com</a> from the
+    account's email address and we'll process the deletion.
+  </div>
+
+  <footer>
+    CODEZAUR Dominik Lipinski ·
+    <a href="https://codezaur-labs.github.io/BibleWisdom/privacy-policy">Privacy Policy</a>
+  </footer>
+</main>
+
+<script>
+const API = "https://api-bible-users.contentfactory.trade";
+const form = document.getElementById("delete-form");
+const btn = document.getElementById("submit");
+const msg = document.getElementById("message");
+
+function show(text, ok) {
+  msg.textContent = text;
+  msg.className = "msg " + (ok ? "ok" : "error");
+  msg.style.display = "block";
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  btn.disabled = true;
+  msg.style.display = "none";
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value;
+
+  try {
+    const login = await fetch(API + "/api/v1/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, device_label: "deletion page" })
+    });
+    if (!login.ok) {
+      show(login.status === 401
+        ? "Invalid email or password."
+        : "Couldn't sign in (" + login.status + ") — try again in a moment.");
+      return;
+    }
+    const { access_token } = await login.json();
+
+    const del = await fetch(API + "/api/v1/me", {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + access_token }
+    });
+    if (del.status === 204 || del.ok) {
+      show("Your account has been permanently deleted. " +
+           "You can now safely uninstall the app.", true);
+      form.reset();
+    } else {
+      show("Sign-in worked but deletion failed (" + del.status +
+           ") — please email codezaur@gmail.com and we'll finish it manually.");
+    }
+  } catch (err) {
+    show("No connection — check your internet and try again.");
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
