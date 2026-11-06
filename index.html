@@ -1,17 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- <meta name="google-site-verification" content="" /> -->
-    <title>Bible Wisdom — Legal</title>
+<meta charset="utf-8">
+<!-- <meta name="google-site-verification" content="" /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scriptum — Legal</title>
+<style>
+  :root {
+    --bg: #0f131c;
+    --surface: #181c24;
+    --surface-high: #1c2028;
+    --border: rgba(126, 156, 185, 0.18);
+    --text: #dfe2ee;
+    --text-dim: #94a3b8;
+    --gold: #d4af37;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(26, 38, 64, 0.5) 0%, transparent 70%),
+      var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1.25rem;
+  }
+  main { width: 100%; max-width: 540px; }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem;
+  }
+  .brand {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  p { color: var(--text-dim); font-size: 0.95rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--radius);
+    padding: 0.5rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .card a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .card a + a { border-top: 1px solid rgba(126, 156, 185, 0.08); }
+  .card a::after {
+    content: "›";
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+  .card a:hover { color: var(--gold); }
+  footer { margin-top: 3rem; font-size: 0.8rem; color: var(--text-dim); }
+</style>
 </head>
 <body>
-    <h1>Bible Wisdom — Legal</h1>
-    <h2>Links:</h2>
-    <ul>
-        <li><a href="https://codezaur-labs.github.io/Scriptum/privacy-policy" target="_blank">Privacy Policy</a></li>
-        <li><a href="https://codezaur-labs.github.io/Scriptum/terms-of-service" target="_blank">Terms and Conditions</a></li>
-        <li><a href="https://codezaur-labs.github.io/Scriptum/delete-account" target="_blank">Delete Account</a></li>
-    </ul>
+<main>
+  <div class="brand">Scriptum</div>
+  <h1>Legal</h1>
+  <p>Privacy policy, terms of service and account management for the
+     Scriptum app.</p>
+
+  <nav class="card">
+    <a href="https://codezaur-labs.github.io/Scriptum/privacy-policy" target="_blank">Privacy Policy</a>
+    <a href="https://codezaur-labs.github.io/Scriptum/terms-of-service" target="_blank">Terms and Conditions</a>
+    <a href="https://codezaur-labs.github.io/Scriptum/delete-account" target="_blank">Delete your account</a>
+  </nav>
+
+  <footer>CODEZAUR Dominik Lipinski · codezaur [at] gmail [dot] com</footer>
+</main>
 </body>
 </html>
+
