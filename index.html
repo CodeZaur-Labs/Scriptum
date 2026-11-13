@@ -46,6 +46,15 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .brand img {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
   }
   p { color: var(--text-dim); font-size: 0.95rem; }
   .card {
@@ -77,8 +86,11 @@
 </head>
 <body>
 <main>
-  <div class="brand">Scriptum</div>
+  <div class="brand"><img src="logo.png" alt="Scriptum logo">Scriptum</div>
   <h1>Legal</h1>
+  <p>Scriptum is a daily Bible wisdom app — it delivers one curated verse each
+     day as a notification, matched to your chosen topics and language. It uses
+     Google sign-in so your account, favorites and settings stay in sync.</p>
   <p>Privacy policy, terms of service and account management for the
      Scriptum app.</p>
 
@@ -92,4 +104,3 @@
 </main>
 </body>
 </html>
-
