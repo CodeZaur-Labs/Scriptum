@@ -1,7 +1,7 @@
 # Privacy Policy — Scriptum
 
 **Effective date:** 2026-10-27
-**Last updated:** 2026-11-05
+**Last updated:** 2026-11-14
 
 This Privacy Policy explains what data the **Scriptum** app and its
 backend services (`api-bible`, `api-bible-users`; collectively the
@@ -26,10 +26,11 @@ Data Protection Officer; the contact above reaches the person responsible.
 - Accounts are optional and collect the minimum: email, timezone,
   display name — plus a password hash for email registration or a Google
   sign-in link for Google accounts.
-- **No advertising, no analytics SDKs, no trackers, no cookies, no contact
-  upload, no location tracking, no sale of data.** If advertising or
-  analytics ever arrive, this policy will be updated and your consent
-  collected where required — before anything ships.
+- **Product analytics and install attribution ship with a master switch.**
+  Firebase Analytics/Crashlytics and Meta AppEvents measure app usage and
+  attribute installs; a single **Settings → Privacy → Analytics** toggle
+  turns all of it off. Still **no advertising shown in-app, no cookies, no
+  contact upload, no location tracking, no sale of data.**
 - Friends features (when shipped) use **friend codes**, not your address
   book.
 - There's almost nothing to export — but we'll send you what we hold on
@@ -50,7 +51,7 @@ One distinction matters:
 
 **Never leaves your device at all:**
 
-- notification time and enabled flag; notification permission state;
+- notification time and enabled flag;
 - cached daily verse and fetch date; bookmarks; reading preferences
   (e.g. testament ordering, theme mode);
 - your **reading history** — every verse marked as read, with timestamps,
@@ -124,7 +125,30 @@ public Google profile image directly from Google to display it locally.
 - Treat queries as potentially sensitive: do not enter information you
   would not send to a third-party AI service.
 
-### 4.6 Technical logs
+### 4.6 Analytics and attribution
+
+While the **Settings → Privacy → Analytics** toggle is on (it is on by
+default), the app reports product events to **Firebase Analytics** and
+**Meta AppEvents**:
+
+- **what is sent:** coarse usage events only — screens visited,
+  notification-permission result (granted/denied), a verse shared, a
+  bookmark added, topic/language changes, corpus downloads, a chapter
+  opened, and a one-time `install_attribution` event carrying any
+  `utm_*` parameters the Play Store recorded at install;
+- **what is never sent:** verse or bookmark **content**, per-verse reading
+  history, search queries, account identifiers, contacts, or location;
+- **identifiers:** Firebase collects an app-instance/device identifier;
+  Meta may collect the Android advertising ID — both stop when the toggle
+  is off;
+- **crash reports** go to **Firebase Crashlytics** (stack trace, device
+  model, OS version) so we can fix bugs;
+- the **Play Install Referrer** string is read once on first launch and
+  stored on-device; only the parsed `utm_source/medium/campaign/content`
+  values are reported;
+- switching the toggle off halts all of the above going forward.
+
+### 4.7 Technical logs
 
 Standard web logs (nginx/Cloudflare: IP, path, status, timestamp) kept for
 security and debugging. Access and refresh tokens are never logged.
@@ -139,6 +163,7 @@ security and debugging. Access and refresh tokens are never logged.
 | Subscription verification, purchase audit (when shipped) | Contract + legal obligation (Art. 6(1)(b), (c)) — consumer/accounting law |
 | Security logs, rate limiting, abuse prevention | Legitimate interest (Art. 6(1)(f)) |
 | Semantic-search queries to the embedding provider (when shipped) | Contract (Art. 6(1)(b)) — the feature you invoked |
+| Product analytics, crash reports, install attribution | Consent (Art. 6(1)(a)) — withdrawable anytime via Settings → Privacy → Analytics |
 
 *(b) = needed to provide the feature you asked for; (c) = the law
 requires it (consumer/accounting rules); (f) = our justified operational
@@ -149,6 +174,8 @@ interest — you may object to (f) (see §9).*
 | Third party | Role | What they receive |
 |---|---|---|
 | Google (Sign-In, Play Billing; currently also the embedding API) | auth, payments, search ranking | Google ID tokens (verified server-side); purchase tokens; your search query text |
+| Google Firebase (Analytics, Crashlytics) | product analytics, crash reporting | usage events listed in §4.6, app-instance identifier, crash diagnostics |
+| Meta Platforms (AppEvents) | install attribution, ad-campaign measurement | the app events listed in §4.6; advertising ID while the toggle is on |
 | Cloudflare | CDN/WAF, TLS termination, rate limiting | all public-API traffic metadata (IP, request line) |
 | Hetzner | hosting (VPS in the EU) | the whole database and logs — as our hosting sub-processor |
 
@@ -158,10 +185,10 @@ receives data.
 
 ## 7. International transfers
 
-Google and Cloudflare process data globally, including in the United
-States, under their own data-processing terms incorporating EU Standard
-Contractual Clauses (or equivalent mechanisms under GDPR Art. 46). Hosting
-and our database remain in the EU.
+Google, Cloudflare, and Meta process data globally, including in the
+United States, under their own data-processing terms incorporating EU
+Standard Contractual Clauses (or equivalent mechanisms under GDPR
+Art. 46). Hosting and our database remain in the EU.
 
 ## 8. Retention
 
@@ -188,8 +215,9 @@ As an EU/EEA user you may:
 - **restrict or object** to processing, including legitimate-interest
   processing;
 - **port** your data (contact us — we'll export the records we hold);
-- **withdraw consent** where processing is consent-based (e.g. stop using
-  Google Sign-In) without affecting prior processing;
+- **withdraw consent** where processing is consent-based — switch off
+  Settings → Privacy → Analytics for tracking, or stop using Google
+  Sign-In — without affecting prior processing;
 - **lodge a complaint** with the Polish supervisory authority — Prezes
   Urzędu Ochrony Danych Osobowych (UODO), uodo.gov.pl — or your local DPA.
 
